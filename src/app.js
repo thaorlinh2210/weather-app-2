@@ -56,8 +56,22 @@ function formatDate(timestamp) {
   let day = days[date.getDay()];
   return `${day} ${hours}:${minutes}`;
 }
-//
-let apiKey = "a5acb752426cd8188485c35694980e3a";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=New York&appid=${apiKey}&units=metric`;
 
-axios.get(apiUrl).then(displayTemperature);
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#city-input");
+  console.log(cityInputElement.value);
+  search(cityInputElement.value);
+}
+//
+function search(city) {
+  let apiKey = "a5acb752426cd8188485c35694980e3a";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=New York&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayTemperature);
+}
+
+search("Melbourne");
+
+// Form control
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
