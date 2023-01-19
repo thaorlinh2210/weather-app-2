@@ -1,7 +1,11 @@
+let celciusTemperature = null;
+
 function displayTemperature(response) {
   console.log(response.data);
+  celciusTemperature = response.data.main.temp;
+  console.log(celciusTemperature);
   let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = Math.round(response.data.main.temp);
+  temperatureElement.innerHTML = Math.round(celciusTemperature);
 
   let cityElement = document.querySelector("#city");
   cityElement.innerHTML = response.data.name;
@@ -66,11 +70,39 @@ function handleSubmit(event) {
 //
 function search(city) {
   let apiKey = "a5acb752426cd8188485c35694980e3a";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=New York&appid=${apiKey}&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  console.log(apiUrl);
   axios.get(apiUrl).then(displayTemperature);
 }
 
 search("Melbourne");
+
+// Unit conversion
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+
+function displayFahrenheitTemperature(event) {
+  event.preventDefault();
+  let fahrenheitTemperature = (celciusTemperature * 9) / 5 + 12;
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+  // Remove Celcius link
+  fahrenheitLink.classList.add("active");
+  celciusLink.classList.remove("active");
+}
+
+let celciusLink = document.querySelector("#celcius-link");
+console.log(celciusLink);
+celciusLink.addEventListener("click", displayCelciusTemperature);
+
+function displayCelciusTemperature(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(celciusTemperature);
+  //Remove Fahrenheit link
+  fahrenheitLink.classList.remove("active");
+  celciusLink.classList.add("active");
+}
 
 // Form control
 let form = document.querySelector("#search-form");
