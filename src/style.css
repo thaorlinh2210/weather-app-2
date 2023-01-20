@@ -61,3 +61,20 @@ ul {
 .active {
   text-decoration: none;
 }
+
+.weather-forcast {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.weather-forcast-date {
+  font-size: 16px;
+  color: black;
+  opacity: 0.5;
+}
+.weather-forcast-temperatures {
+  font-size: 13px;
+}
+.weather-forcast-temperature-min {
+  opacity: 0.5;
+}
