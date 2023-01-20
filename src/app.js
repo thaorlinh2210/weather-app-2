@@ -75,8 +75,6 @@ function search(city) {
   axios.get(apiUrl).then(displayTemperature);
 }
 
-search("Melbourne");
-
 // Unit conversion
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
@@ -107,3 +105,34 @@ function displayCelciusTemperature(event) {
 // Form control
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
+
+//Forcast
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row">`;
+  let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
+                <div class="weather-forecast-date">${day}</div>
+                <img
+                  src="http://openweathermap.org/img/wn/03n@2x.png"
+                  alt=""
+                  width="36"
+                />
+                <div class="weather-forecast-temperatures">
+                  <spand class="weather-forecast-temperature-max">18°</spand>
+                  <span class="weather-forecast-temperature-min">23°</span>
+                </div>
+              </div>
+            
+  `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+search("Melbourne");
+displayForecast();
