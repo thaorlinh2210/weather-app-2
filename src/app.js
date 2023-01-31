@@ -163,4 +163,5 @@ function formatDay(timestamp) {
   return day;
 }
 search("Melbourne");
+
 displayForecast();
